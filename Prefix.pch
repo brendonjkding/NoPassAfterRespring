@@ -1,0 +1,11 @@
+#ifdef __OBJC__
+
+#if DEBUG
+#else
+#define NSLog(FORMAT, ...)
+#endif
+
+#import <UIKit/UIKit.h>
+extern UIApplication* UIApp;
+
+#endif //__OBJC__
