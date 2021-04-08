@@ -1,7 +1,7 @@
 Package: com.brend0n.nopassafterrespringsafe
 Name: NoPassAfterRespring (Safe)
 Depends: mobilesubstrate
-Version: 0.0.1
+Version: 0.0.2
 Architecture: iphoneos-arm
 Description: Disables passcode after a respring.
 Maintainer: Brend0n <brendonjkding@126.com>

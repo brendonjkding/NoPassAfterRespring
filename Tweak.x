@@ -6,14 +6,14 @@
 %end //SBBootDefaults
 %end
 
-%group CFPreferencesGetAppBooleanValue
-%hookf(Boolean, CFPreferencesGetAppBooleanValue, CFStringRef key, CFStringRef applicationID, Boolean *keyExistsAndHasValidFormat){
+static Boolean (*orig_CFPreferencesGetAppBooleanValue)(CFStringRef key, CFStringRef applicationID, Boolean *keyExistsAndHasValidFormat);
+static Boolean my_CFPreferencesGetAppBooleanValue(CFStringRef key, CFStringRef applicationID, Boolean *keyExistsAndHasValidFormat){
     if(CFEqual(CFSTR("SBDontLockAfterCrash"),key)){
+        MSHookFunction((void *)CFPreferencesGetAppBooleanValue, (void *)orig_CFPreferencesGetAppBooleanValue, NULL);
         return YES;
     }
-    return %orig;
+    return orig_CFPreferencesGetAppBooleanValue(key, applicationID, keyExistsAndHasValidFormat);
 }
-%end//CFPreferencesGetAppBooleanValue
 
 %ctor{
     NSLog(@"NoPassAfterRespring");
@@ -22,7 +22,7 @@
         %init(SBBootDefaults);
     }
     else{
-        %init(CFPreferencesGetAppBooleanValue);
+        MSHookFunction((void *)CFPreferencesGetAppBooleanValue, (void *)my_CFPreferencesGetAppBooleanValue, (void **)&orig_CFPreferencesGetAppBooleanValue);
     }
     
 
