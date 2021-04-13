@@ -11,14 +11,9 @@ endif
 
 INSTALL_TARGET_PROCESSES = SpringBoard
 
-
-
 TWEAK_NAME = NoPassAfterRespringSafe
 
-NoPassAfterRespringSafe_FILES = Tweak.x
-NoPassAfterRespringSafe_CFLAGS = -fobjc-arc
-
-ADDITIONAL_CFLAGS += -Wno-error=unused-variable -Wno-error=unused-function -Wno-error=unused-value -include Prefix.pch
+NoPassAfterRespringSafe_FILES = Tweak.c
 
 include $(THEOS)/makefiles/common.mk
 include $(THEOS_MAKE_PATH)/tweak.mk
